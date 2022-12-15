@@ -1,5 +1,9 @@
-
-
+#API, Module
+import os, time, json, requests
+category = requests.get('https://masak-apa-tomorisakura.vercel.app/api/category/recipes')
+new = requests.get('https://masak-apa-tomorisakura.vercel.app//api/recipes')
+rec = category.json()
+late = new.json()
 
 def mainMenu():
     #Operator
@@ -28,17 +32,54 @@ def mainMenu():
       else:
               os.system('cls')
               mainMenu()
-              
-class masak:
-    def byLatest():
-            print('=' * 84)
-            for i in (late['results']):
-                print(f"Title\t\t\t: {i['title']}")
-                print(f"Thumbnail\t\t: {i['thumb']}")
-                print(f"Times\t\t\t: {i['times']}")
-                print(f"Serving \t\t: {i['serving']}")
-                print(f"Tingkat Kesulitan \t: {i['difficulty']}")
-                print(" ")
-            print('=' * 84)
-          
+    except:
+      print('>>Inputan Salah<<')
+      time.sleep(1)
+      mainMenu()
     
+#Class
+class masak: 
+    #Function
+    def byCategory():
+        #List
+        listCategory = ["1. Dessert", 
+                  "2. Masakan Hari Raya", 
+                  "3. Masakan Tradisional", 
+                  "4. Menu Makan Malam", 
+                  "5. Menu Makan Siang", 
+                  "6. Resep Ayam", 
+                  "7. Resep Daging", 
+                  "8. Resep Sayuran", 
+                  "9. Resep Seafood", 
+                  "10. Menu Sarapan"]
+        print('=' * 40)
+        print('Recipe By Category')
+        #Looping
+        for i in listCategory:
+            print(i)
+        print('=' * 40)
+        
+        choose = input('Input menu\t: ')
+        
+        f = open("history.txt", "a")
+        f.write("\n" + choose)
+        
+        f.close()
+
+        for i in (rec['results']):
+          if i['category'] == choose:
+            print(f"Kategori\t: {i['category']}")
+            print(f"url \t\t: {i['url']}")
+
+    def byLatest():
+        print('=' * 84)
+        for i in (late['results']):
+            print(f"Title\t\t\t: {i['title']}")
+            print(f"Thumbnail\t\t: {i['thumb']}")
+            print(f"Times\t\t\t: {i['times']}")
+            print(f"Serving \t\t: {i['serving']}")
+            print(f"Tingkat Kesulitan \t: {i['difficulty']}")
+            print(" ")
+        print('=' * 84)
+        
+mainMenu()
