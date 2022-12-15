@@ -1,0 +1,44 @@
+
+
+
+def mainMenu():
+    #Operator
+    print('=' * 40)
+    #Input-Output-Tipe Data
+    menu = ["1. Recipes by Category", 
+            "2. New Recipes",
+            "3. Exit"]
+    for i in menu:
+        print(i)
+    print('=' * 40)
+    print("Pilih salah satu: ")
+    
+    try:
+      pilihMenu = input()
+
+      #if statement
+      if pilihMenu == '1':
+              masak.byCategory()
+      elif pilihMenu == '2':
+              masak.byLatest()
+      elif pilihMenu == '3':
+              #String Method
+              print("exit").capitalize()
+              exit()
+      else:
+              os.system('cls')
+              mainMenu()
+              
+class masak:
+    def byLatest():
+            print('=' * 84)
+            for i in (late['results']):
+                print(f"Title\t\t\t: {i['title']}")
+                print(f"Thumbnail\t\t: {i['thumb']}")
+                print(f"Times\t\t\t: {i['times']}")
+                print(f"Serving \t\t: {i['serving']}")
+                print(f"Tingkat Kesulitan \t: {i['difficulty']}")
+                print(" ")
+            print('=' * 84)
+          
+    
